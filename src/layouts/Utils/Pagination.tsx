@@ -32,7 +32,7 @@ export const Pagination: React.FC<{
   }
   return (
     <nav aria-label="...">
-      <ul lang="pagination">
+      <ul className="pagination">
         <li className="page-item" onClick={() => props.paginate(1)}>
           <button className="page-link">First Page</button>
         </li>
