@@ -9,11 +9,12 @@ export const SearchBooksPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [booksPerPage, setBooksPerPage] = useState(10);
+  const [booksPerPage, setBooksPerPage] = useState(5);
   const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [search, setSearch] = useState("");
   const [searchUrl, setSearchUrl] = useState("");
+  const [categorySelection, setCategorySelection] = useState("Book Category");
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -23,7 +24,11 @@ export const SearchBooksPage = () => {
       if (searchUrl === "") {
         url = `${baseUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
       } else {
-        url = baseUrl + searchUrl;
+        let searchWithPage = searchUrl.replace(
+          "<pageNumber>",
+          `${currentPage - 1}`
+        );
+        url = baseUrl + searchWithPage;
       }
 
       const response = await fetch(url);
@@ -73,12 +78,32 @@ export const SearchBooksPage = () => {
   }
 
   const searchHandleChange = () => {
+    setCurrentPage(1);
     if (search === "") {
       setSearchUrl("");
     } else {
       setSearchUrl(
-        `/search/findByTitleContaining?title=${search}&page=0&size=${booksPerPage}`
+        `/search/findByTitleContaining?title=${search}&page=<pageNumber>&size=${booksPerPage}`
       );
+    }
+    setCategorySelection("Book Category");
+  };
+
+  const categoryField = (value: string) => {
+    setCurrentPage(1);
+    if (
+      value.toLowerCase() === "fe" ||
+      value.toLowerCase() === "be" ||
+      value.toLowerCase() === "data" ||
+      value.toLowerCase() === "devops"
+    ) {
+      setCategorySelection(value);
+      setSearchUrl(
+        `/search/findByCategory?category=${value}&page=<pageNumber>&size=${booksPerPage}`
+      );
+    } else {
+      setCategorySelection("All");
+      setSearchUrl(`?page=<pageNumber>&size=${booksPerPage}`);
     }
   };
 
@@ -123,33 +148,33 @@ export const SearchBooksPage = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Category
+                  {categorySelection}
                 </button>
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton1"
                 >
-                  <li>
+                  <li onClick={() => categoryField("All")}>
                     <a href="#" className="dropdown-item">
                       All
                     </a>
                   </li>
-                  <li>
+                  <li onClick={() => categoryField("FE")}>
                     <a href="#" className="dropdown-item">
                       Front End
                     </a>
                   </li>
-                  <li>
+                  <li onClick={() => categoryField("BE")}>
                     <a href="#" className="dropdown-item">
                       Back End
                     </a>
                   </li>
-                  <li>
+                  <li onClick={() => categoryField("Data")}>
                     <a href="#" className="dropdown-item">
                       Data{" "}
                     </a>
                   </li>
-                  <li>
+                  <li onClick={() => categoryField("DevOps")}>
                     <a href="#" className="dropdown-item">
                       DevOps
                     </a>
