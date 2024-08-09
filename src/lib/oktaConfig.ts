@@ -15,7 +15,7 @@ export const oktaConfig = {
     redirectUri: "http://localhost:3000/login/callback",
     scopes: ["openid", "profile", "email"],
     pkce: true,
-    disableHttpsChecks: true
+    disableHttpsCheck: true
 }
 // Okta Login : https://dev-04591174.okta.com/
 
