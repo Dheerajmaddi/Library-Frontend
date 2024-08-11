@@ -9,13 +9,12 @@
 //     disableHttpsChecks: true
 // }
 
+
 export const oktaConfig = {
-    clientId: "0oait5breyTNVKYoS5d7",
+    clientId: "0oaiwwrdyim4dxUXH5d7",
     issuer: "https://dev-04591174.okta.com/oauth2/default",
     redirectUri: "http://localhost:3000/login/callback",
     scopes: ["openid", "profile", "email"],
     pkce: true,
-    disableHttpsCheck: true
-}
-// Okta Login : https://dev-04591174.okta.com/
-
+    disableHttpsCjeck: true
+};
