@@ -126,8 +126,8 @@ export const BookCheckoutPage = () => {
         }
         const userReviewResponseJson = await userReview.json();
         setIsReviewLeft(userReviewResponseJson);
-        setIsLoadingUserReview(false);
       }
+      setIsLoadingUserReview(false);
     };
     fetchUserReviewBook().catch((error: any) => {
       setIsLoadingUserReview(false);
