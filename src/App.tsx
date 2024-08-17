@@ -12,6 +12,7 @@ import LoginWidget from "./Auth/LoginWidget";
 import { ReviewListPage } from "./layouts/BookCheckoutPage/ReviewListPage/ReviewListPage";
 import { ShelfPage } from "./layouts/ShelfPage/ShelfPage";
 import { MessagesPage } from "./layouts/MessagesPage/MessagesPage";
+import { ManageLibraryPage } from "./layouts/ManageLibraryPage/ManageLibraryPage";
 
 // TEST USER = testuser@email.com && test@1234
 
@@ -69,6 +70,9 @@ export const App = () => {
 
             <SecureRoute path="/messages">
               <MessagesPage />
+            </SecureRoute>
+            <SecureRoute path="/admin">
+              <ManageLibraryPage />
             </SecureRoute>
           </Switch>
         </div>
