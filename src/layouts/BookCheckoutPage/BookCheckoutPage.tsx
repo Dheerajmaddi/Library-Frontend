@@ -70,7 +70,6 @@ export const BookCheckoutPage = () => {
   useEffect(() => {
     const fetchBookReviews = async () => {
       const reviewUrl: string = `${process.env.REACT_APP_API}/reviews/search/findByBookId?bookId=${bookId}`;
-
       const responseReviews = await fetch(reviewUrl);
       if (!responseReviews.ok) {
         throw new Error("Something went wrong!");
