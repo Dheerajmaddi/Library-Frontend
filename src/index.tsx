@@ -6,12 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe(
-  "pk_test_51PqMkwAo137Zn86NWpjkp4hfV23ZDERwDaxVwzkSCxvsYczR1SAiloeLcdsSF3WL9w0sNZtWUIt96yd6yP3pjmAb00lnk9oO78"
-);
-
-// console.log("Stripe Publish Key: ", process.env.STRIPE_PUBLISH_KEY);
-console.log("Stripe Promise:", stripePromise);
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISH_KEY}`);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
